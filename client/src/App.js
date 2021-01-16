@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Input from './components/input/Input'
+import Keyboard from './components/keyboard/Keyboard'
 import './App.css';
 
 function App() {
@@ -7,32 +9,9 @@ function App() {
 
   return (
     <div className="calc">
-        <div className="calc-display">
-          <p>{userInput}</p>
-        </div>
-        <div className="calc-buttons">
-            <button onClick={() => setUserInput([...userInput, 7])}>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button className="operand">/</button>
-        
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button className="operand">x</button>
-        
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button className="operand">+</button>
-        
-            <button>.</button>
-            <button>0</button>
-            <button>=</button>
-            <button className="operand">-</button>
-        
-            <button>C</button>
-        </div>
+        <Input userInput={userInput}></Input>
+        <Keyboard userInput={userInput} setUserInput={setUserInput}></Keyboard>
+
     </div>
   );
 }

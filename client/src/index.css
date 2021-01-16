@@ -6,7 +6,6 @@
 
 html{
   font-size: 62.5%;
-  
 }
 
 body{
@@ -37,20 +36,8 @@ body{
   flex-wrap: wrap;
 }
 
-.calc-buttons > button {
+.calc-buttons > .button {
   flex: 25%;
-}
-
-button{
-  height: 8rem;
-  font-size: 2rem;
-  border: 1px solid gray;
-  outline: none;
-}
-
-button:hover{
-  cursor: pointer;
-  background-color: rgb(194, 192, 192);
 }
 
 .operand{
