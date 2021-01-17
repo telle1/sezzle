@@ -4,12 +4,11 @@ import socket from '../socket';
 import Input from './Input';
 import Keyboard from './Keyboard';
 import PastCalcs from './PastCalcs';
-
-
+import './styles/calculator.css'
 
 function Calculator(){
   
- const { currNum, operator, prevNum, getAns, smallCalcDisplay } = useContext(CalcContext);
+ const { currNum, operator, prevNum, getAns} = useContext(CalcContext);
 
   // console.log(
   //   'userinput:',
@@ -35,16 +34,15 @@ function Calculator(){
   }, [currNum, operator, prevNum]);
 
     return (
-        <React.Fragment>
+        <div className="calc-app">
             <div className='calc'>
-                {smallCalcDisplay}
                 <Input/>
                 <Keyboard/>
             </div>
             <div className='past-calcs'>
                 <PastCalcs/>
             </div>
-      </React.Fragment>
+      </div>
     )
 }
 

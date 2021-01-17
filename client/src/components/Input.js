@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
 import { CalcContext } from './CalcProvider';
+import './styles/input.css'
 
 function Input(){
 
-    const { userInput } = useContext(CalcContext);
+    const { userInput, smallCalcDisplay, prevNum } = useContext(CalcContext);
 
     return (
         <div className="calc-display">
-            <p>{userInput}</p>
+            <div className="small-calc-display">
+                {smallCalcDisplay}
+            </div>
+            <div className="large-calc-display">
+                {userInput || prevNum}
+            </div>
         </div>
     )
 }

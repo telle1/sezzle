@@ -1,0 +1,27 @@
+.calc-display{
+    width: 100%;
+    background-color: #516a77;
+    height: 14rem;
+    text-align: right; 
+  }
+
+  .calc-display > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    padding-right: 2rem;
+  }
+
+  .small-calc-display{
+    font-size: 2rem;
+    background-color: white;
+    height: 25%;
+  }
+
+  .large-calc-display{
+    font-size: 5rem;
+    height: 75%;
+    text-align: right;
+    transition: all 1s;
+    color: white;
+  }

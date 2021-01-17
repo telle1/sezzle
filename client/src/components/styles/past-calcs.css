@@ -1,0 +1,22 @@
+.past-calcs{
+    font-size: 3rem;
+    text-transform: uppercase;
+    padding-left: 5rem;
+    
+    color: white;
+}
+
+.past-calc-item h3{
+    padding: 1rem 0;
+    font-weight: 300;   
+}
+
+.past-calc-item span {
+    display: inline-block;
+    text-align: center;
+    background-color: white;
+    color: rgb(201, 94, 201);
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
