@@ -8,10 +8,25 @@ function Button(props){
         return !isNaN(val) || val === '.' || val === '=';
     }    
 
+    // const handleClick = () => {
+    //     if (isOperator(props.children)){
+    //         props.setUserInput([...props.userInput, props.children])
+    //     } else {
+    //         props.setOperator(props.children)
+    //         props.setPrevNum([...props.currNum]) 
+    //         // props.setCurrNum([])
+            
+    //     }
+        // isOperator(props.children) ? props.setUserInput([...userInput, input]) : return {
+        //     props.setOperator(props.children)
+        //     props.setCurrNum([])
+        //     props.setPrevNum([...currNum])
+        // }
+        
+// }
+
     return (
-        <div className={`button ${isOperator(props.children) ? null : 'operator'} `} onClick={() => {
-            socket.emit('input', {test: props.children});
-        }}>
+        <div className={`button ${isOperator(props.children) ? null : 'operator'} `} onClick={props.handleClick}>
             {props.children}
         </div>
     )

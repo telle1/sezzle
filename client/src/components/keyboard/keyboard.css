@@ -1,0 +1,12 @@
+.calc-buttons{
+    display: flex;
+    flex-direction: column;
+  }
+
+.calc-buttons .row{
+    display: flex;
+}
+
+.row > * {
+    flex: 1;
+}

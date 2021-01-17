@@ -15,10 +15,22 @@ app.get('/', (req, res) => {
 io.on('connection', socket => {
     console.log('a user connected');
 
-    socket.on('input', ({ test }) => {
-        console.log(test, 'user input');
-        io.emit('input', { test })
-    });
+  //   socket.on('input', ({ userInput }) => {
+  //       console.log(userInput, 'user input');
+  //       io.emit('input', { input: userInput })
+  //   });
+
+
+  //   socket.on('do op', ({ operator }) => {
+  //     console.log(operator, 'operator')
+  //     io.emit('do op', {operator} )
+  //   })
+
+  //   socket.on('clear-input', () => {
+  //     io.emit('clear-input')
+  // });
+
+
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
