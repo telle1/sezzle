@@ -31,12 +31,4 @@ body{
   text-align: right; 
 }
 
-.calc-buttons{
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.calc-buttons > .button {
-  flex: 25%;
-}
 

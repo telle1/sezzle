@@ -1,16 +1,16 @@
 .button{
-height: 8rem;
-font-size: 5rem;
-border: 1px solid gray;
-outline: none;
-display: flex;
-justify-content: center;
-align-items: center;
+    height: 8rem;
+    font-size: 5rem;
+    border: 1px solid gray;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
   
 .button:hover{
-cursor: pointer;
-background-color: rgb(194, 192, 192);
+    cursor: pointer;
+    background-color: rgb(194, 192, 192);
 }
 
 .operator{
