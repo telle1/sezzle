@@ -4,46 +4,62 @@ import socket from '../socket';
 import Input from './Input';
 import Keyboard from './Keyboard';
 import PastCalcs from './PastCalcs';
-import './styles/calculator.css'
+import './styles/calculator.css';
 
-function Calculator(){
-  
- const { currNum, operator, prevNum, getAns} = useContext(CalcContext);
+function Calculator() {
+  const { calculations, setCalculations } = useContext(CalcContext);
 
-  // console.log(
-  //   'userinput:',
-  //   userInput,
-  //   'currnum:',
-  //   currNum,
-  //   'prevnum:',
-  //   prevNum,
-  //   'operator:',
-  //   operator
-  // );
+  useEffect(() => {
 
-  useEffect(() =>  {
+    console.log(calculations,'calcsaufshsdhoa')
+
+    let savedCalculations = localStorage.getItem('calculations');
+    console.log(savedCalculations)
+    if (savedCalculations) {
+      setCalculations(JSON.parse(savedCalculations));
+    }
+
     socket.on('connect', () => {
       console.log('connected to backend');
     });
-    getAns();
 
-    // return () => {
-    //   socket.emit('disconnect');
-    //   socket.off()
-    // }
-  }, [currNum, operator, prevNum]);
+    return () => {
+      socket.off('Logging off');
+    };
+  }, []);
 
-    return (
-        <div className="calc-app">
-            <div className='calc'>
-                <Input/>
-                <Keyboard/>
-            </div>
-            <div className='past-calcs'>
-                <PastCalcs/>
-            </div>
+  useEffect(() => {
+
+    socket.on('calculation', ({ calculation }) => {
+      console.log(calculations, 'calculationsadasddasd')
+      if (calculations.length === 10) {
+        let limitTen = calculations.slice(0, 9);
+        setCalculations([calculation, ...limitTen]);
+        localStorage.setItem(
+          'calculations',
+          JSON.stringify([calculation, ...limitTen])
+        );
+      } else {
+        setCalculations([calculation, ...calculations]);
+        localStorage.setItem(
+          'calculations',
+          JSON.stringify([calculation, ...calculations])
+        );
+      }
+    });
+  }, [calculations]);
+
+  return (
+    <div className='calc-app'>
+      <div className='calc'>
+        <Input />
+        <Keyboard />
       </div>
-    )
+      <div className='past-calcs'>
+        <PastCalcs />
+      </div>
+    </div>
+  );
 }
 
 export default Calculator;

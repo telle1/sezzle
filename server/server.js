@@ -20,17 +20,10 @@ io.on('connection', socket => {
   //       io.emit('input', { input: userInput })
   //   });
 
-
-  //   socket.on('do op', ({ operator }) => {
-  //     console.log(operator, 'operator')
-  //     io.emit('do op', {operator} )
-  //   })
-
-  //   socket.on('clear-input', () => {
-  //     io.emit('clear-input')
-  // });
-
-
+      socket.on('calculation', ({ calculation }) => {
+        console.log(calculation, 'calc');
+        io.emit('calculation', { calculation })
+    });
 
     socket.on('disconnect', () => {
         console.log('user disconnected');

@@ -1,6 +1,13 @@
 import React, { createContext, useState } from 'react';
-
+import socket from '../socket';
 export const CalcContext = createContext({});
+
+const ops = {
+  '+': (prevNum, currNum) => prevNum + currNum,
+  '-': (prevNum, currNum) => prevNum - currNum,
+  '*': (prevNum, currNum) => prevNum * currNum,
+  '/': (prevNum, currNum) => prevNum / currNum,
+};
 
 function CalcProvider(props) {
   const [currNum, setCurrNum] = useState('');
@@ -11,10 +18,11 @@ function CalcProvider(props) {
 
   const [calculations, setCalculations] = useState([]);
 
+  console.log('calculations', calculations)
+
   const addNum = (num) => {
     setUserInput(userInput + num);
     setSmallCalcDisplay(smallCalcDisplay + num);
-    console.log(userInput);
   };
 
   const addOperation = (operation) => {
@@ -41,27 +49,15 @@ function CalcProvider(props) {
 
   const solveEq = () => {
     setCurrNum(userInput);
-  };
-
-  const ops = {
-    '+': (prevNum, currNum) => prevNum + currNum,
-    '-': (prevNum, currNum) => prevNum - currNum,
-    '*': (prevNum, currNum) => prevNum * currNum,
-    '/': (prevNum, currNum) => prevNum / currNum,
-  };
-
-  const getAns = () => {
-    if (currNum !== '') {
-      console.log(currNum);
-      if (operator !== '') {
-        let answer = ops[operator](parseFloat(prevNum), parseFloat(currNum));
-        setUserInput(answer);
-        setOperator('');
-        setCurrNum('');
-        setCalculations([...calculations, [smallCalcDisplay, `=${answer}`]]);
+    if(prevNum && operator){
+      let answer = ops[operator](parseFloat(prevNum), parseFloat(userInput));
+      setUserInput(answer);
+      setOperator('');
+      setCurrNum('');
+      socket.emit('calculation', { calculation: [smallCalcDisplay, `=${answer}`]});
       }
-    }
   };
+
 
   return (
     <CalcContext.Provider
@@ -71,13 +67,13 @@ function CalcProvider(props) {
         handleClear,
         allowZeroes,
         solveEq,
-        getAns,
+        setCalculations,
+        calculations,
         userInput,
         smallCalcDisplay,
         currNum,
         operator,
         prevNum,
-        calculations,
       }}
     >
       {props.children}
@@ -86,3 +82,17 @@ function CalcProvider(props) {
 }
 
 export default CalcProvider;
+
+
+  // const getAns = () => {
+  //   if (currNum !== '') {
+  //     if (operator !== '') {
+  //       let answer = ops[operator](parseFloat(prevNum), parseFloat(currNum));
+  //       setUserInput(answer);
+  //       setOperator('');
+  //       setCurrNum('');
+  //       // setCalculations([...calculations, [smallCalcDisplay, `=${answer}`]]);
+  //       socket.emit('calculation', { calculation: [smallCalcDisplay, `=${answer}`]});
+  //     }
+  //   }
+  // };

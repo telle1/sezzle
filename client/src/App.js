@@ -6,8 +6,7 @@ import './App.css';
 // import io from 'socket.io-client'
 // let socket = io('http://localhost:5000', {transports: ['websocket', 'polling', 'flashsocket']});
 // export default socket;
-
-const ENDPOINT = 'http://localhost:5000';
+// const ENDPOINT = 'http://localhost:5000';
 
 function App() {
 
