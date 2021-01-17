@@ -40,10 +40,3 @@ body{
   flex: 25%;
 }
 
-.operand{
-  background-color: orange;
-}
-
-.operand:hover{
-  background-color: rgb(255, 123, 0);
-}

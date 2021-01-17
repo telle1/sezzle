@@ -11,7 +11,6 @@ function App() {
     <div className="calc">
         <Input userInput={userInput}></Input>
         <Keyboard userInput={userInput} setUserInput={setUserInput}></Keyboard>
-
     </div>
   );
 }
