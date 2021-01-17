@@ -1,6 +1,6 @@
 import React from 'react';
-import CalcProvider from './components/provider/CalcProvider';
-import Calculator from './components/calculator/Calculator';
+import CalcProvider from './components/CalcProvider';
+import Calculator from './components/Calculator';
 import './App.css';
 // import socket from './socket';
 // import io from 'socket.io-client'
