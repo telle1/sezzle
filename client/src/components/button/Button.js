@@ -1,5 +1,6 @@
 import React from 'react';
 import './button.css';
+import socket from '../../socket'
 
 function Button(props){
 
@@ -8,7 +9,9 @@ function Button(props){
     }    
 
     return (
-        <div className={`button ${isOperator(props.children) ? null : 'operator'} `} onClick={() => props.setUserInput([...props.userInput, props.children])}>
+        <div className={`button ${isOperator(props.children) ? null : 'operator'} `} onClick={() => {
+            socket.emit('input', {test: props.children});
+        }}>
             {props.children}
         </div>
     )
