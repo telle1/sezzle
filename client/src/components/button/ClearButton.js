@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './clearbutton.css';
-import socket from '../../socket'
+import { CalcContext } from '../provider/CalcProvider';
 
 function ClearButton(props){
+
+    const { handleClear }= useContext(CalcContext);
+
     return (
-       <div className="button" onClick={props.handleClick}>
+       <div className="button" onClick={handleClear}>
            {props.children}
        </div> 
     )

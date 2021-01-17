@@ -1,32 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CalcContext } from '../provider/CalcProvider';
 import './button.css';
-import socket from '../../socket'
 
 function Button(props){
 
-    const isOperator = val => {
-        return !isNaN(val) || val === '.' || val === '=';
+    const { addNum, allowZeroes, solveEq, addOperation } = useContext(CalcContext);
+
+
+    const isNotOperator = val => {
+        return !isNaN(val) || val === '=';
     }    
 
-    // const handleClick = () => {
-    //     if (isOperator(props.children)){
-    //         props.setUserInput([...props.userInput, props.children])
-    //     } else {
-    //         props.setOperator(props.children)
-    //         props.setPrevNum([...props.currNum]) 
-    //         // props.setCurrNum([])
-            
-    //     }
-        // isOperator(props.children) ? props.setUserInput([...userInput, input]) : return {
-        //     props.setOperator(props.children)
-        //     props.setCurrNum([])
-        //     props.setPrevNum([...currNum])
-        // }
-        
-// }
+    const handleClick = () => {
+        if (!isNotOperator(props.children) ){
+            addOperation(props.children)
+        } else if (props.children === '0'){
+            allowZeroes(props.children)
+        } else if (props.children === '='){
+            solveEq();
+        } else {
+            addNum(props.children)
+        }
+    }
 
     return (
-        <div className={`button ${isOperator(props.children) ? null : 'operator'} `} onClick={props.handleClick}>
+        <div className={`button ${isNotOperator(props.children) ? null : 'operator'} `} onClick={handleClick}>
             {props.children}
         </div>
     )

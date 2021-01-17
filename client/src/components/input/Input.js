@@ -1,7 +1,13 @@
-function Input(props){
+import React, { useContext } from 'react';
+import { CalcContext } from '../provider/CalcProvider';
+
+function Input(){
+
+    const { userInput } = useContext(CalcContext);
+
     return (
         <div className="calc-display">
-            <p>{props.userInput}</p>
+            <p>{userInput}</p>
         </div>
     )
 }
