@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { CalcContext } from './/CalcProvider';
-import './styles/clearbutton.css';
-
 
 function ClearButton(props){
 

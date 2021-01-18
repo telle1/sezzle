@@ -6,7 +6,6 @@ function Button(props){
 
     const { addNum, allowZeroes, solveEq, addOperation } = useContext(CalcContext);
 
-
     const isNotOperator = val => {
         return !isNaN(val) || val === '=';
     }    

@@ -59,7 +59,7 @@ function CalcProvider(props) {
   const allowZeroes = zero => {
     if (userInput !== '') {
       setUserInput(userInput + zero);
-      console.log(userInput);
+      setSmallCalcDisplay(smallCalcDisplay + zero);
     }
   };
 
@@ -95,15 +95,3 @@ function CalcProvider(props) {
 export default CalcProvider;
 
 
-  // const getAns = () => {
-  //   if (currNum !== '') {
-  //     if (operator !== '') {
-  //       let answer = ops[operator](parseFloat(prevNum), parseFloat(currNum));
-  //       setUserInput(answer);
-  //       setOperator('');
-  //       setCurrNum('');
-  //       // setCalculations([...calculations, [smallCalcDisplay, `=${answer}`]]);
-  //       socket.emit('calculation', { calculation: [smallCalcDisplay, `=${answer}`]});
-  //     }
-  //   }
-  // };

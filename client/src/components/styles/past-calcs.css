@@ -2,8 +2,11 @@
     font-size: 3rem;
     text-transform: uppercase;
     padding-left: 5rem;
-    
     color: white;
+}
+
+.past-calc-title{
+    text-align: center;
 }
 
 .past-calc-item h3{
@@ -18,5 +21,24 @@
     color: rgb(201, 94, 201);
     width: 5rem;
     height: 5rem;
+    border: 1px solid rgb(201, 94, 201);
+
     border-radius: 50%;
+}
+
+.button-clear-past{
+    display: block;
+    margin: 2rem auto;
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid rgb(201, 94, 201);
+    outline: none;
+    color: rgb(201, 94, 201);
+}
+
+.button-clear-past:hover{
+    cursor: pointer;
+    background-color: rgb(252, 150, 132) ;
+    color: white;
 }

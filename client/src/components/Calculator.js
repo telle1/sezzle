@@ -17,11 +17,11 @@ function Calculator() {
   return (
     <div className='calc-app'>
       <div className='calc'>
-        <Input />
-        <Keyboard />
+        <Input/>
+        <Keyboard/>
       </div>
       <div className='past-calcs'>
-        <PastCalcs />
+        <PastCalcs/>
       </div>
     </div>
   );
