@@ -1,6 +1,7 @@
 const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
@@ -19,14 +20,21 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World Test!')
+// })
 
-
-
-if (process.env.NODE_ENV === 'production'){
-  app.use(express.static('client/build'))
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static('client/build'));
+// Handle React routing, return all requests to React app
+  app.get('*', function(req, res){
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    if (err) {
+      console.log(err)
+      res.status(500).send(err)
+    }
+  });
 }
 
 const PORT = process.env.PORT || 5000;
