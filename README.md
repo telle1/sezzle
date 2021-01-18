@@ -20,7 +20,7 @@ Basic calculator that allows users to make live calculations and share it across
 4. Start the client and server
 ```npm run dev.```
 5. Open http://localhost:3000 in browser.
-*Note - to test real-time calculatios locally, change the url in client/src/socket.js to http://localhost:5000
+*Note - to test real-time calculations locally, change the url in client/src/socket.js to http://localhost:5000
 
 ### Preview 
 
