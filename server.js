@@ -2,8 +2,6 @@ const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 
-const PORT = process.env.PORT || 5000;
-
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
@@ -21,11 +19,17 @@ io.on('connection', (socket) => {
   });
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+
 
 if (process.env.NODE_ENV === 'production'){
   app.use(express.static('client/build'))
 }
 
+const PORT = process.env.PORT || 5000;
 
 
 server.listen(PORT, () => {
