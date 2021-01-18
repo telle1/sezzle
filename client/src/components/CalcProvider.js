@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import socket from '../socket';
 export const CalcContext = createContext({});
 
@@ -10,22 +10,39 @@ const ops = {
 };
 
 function CalcProvider(props) {
-  const [currNum, setCurrNum] = useState('');
   const [prevNum, setPrevNum] = useState('');
   const [operator, setOperator] = useState('');
   const [userInput, setUserInput] = useState('');
   const [smallCalcDisplay, setSmallCalcDisplay] = useState('');
-
   const [calculations, setCalculations] = useState([]);
 
-  console.log('calculations', calculations)
+  useEffect(() => {
 
-  const addNum = (num) => {
+    let savedCalculations = localStorage.getItem('calculations');
+    if (savedCalculations) {
+      setCalculations(JSON.parse(savedCalculations));
+    }
+
+    socket.on('connect', () => {
+      console.log('Connected from client');
+    });
+
+    socket.on('calculation', ({ calculation }) => {
+      setCalculations(calculations => [calculation, ...calculations.slice(0,9)]);
+    });
+
+    return () => {
+      socket.off('Disconnected from client');
+    };
+  }, []);
+
+
+  const addNum = num => {
     setUserInput(userInput + num);
     setSmallCalcDisplay(smallCalcDisplay + num);
   };
 
-  const addOperation = (operation) => {
+  const addOperation = operation => {
     setPrevNum(userInput);
     setSmallCalcDisplay(userInput + operation);
     setUserInput('');
@@ -36,11 +53,10 @@ function CalcProvider(props) {
     setUserInput('');
     setSmallCalcDisplay('');
     setPrevNum('');
-    setCurrNum('');
     setOperator('');
   };
 
-  const allowZeroes = (zero) => {
+  const allowZeroes = zero => {
     if (userInput !== '') {
       setUserInput(userInput + zero);
       console.log(userInput);
@@ -48,16 +64,13 @@ function CalcProvider(props) {
   };
 
   const solveEq = () => {
-    setCurrNum(userInput);
     if(prevNum && operator){
       let answer = ops[operator](parseFloat(prevNum), parseFloat(userInput));
       setUserInput(answer);
       setOperator('');
-      setCurrNum('');
       socket.emit('calculation', { calculation: [smallCalcDisplay, `=${answer}`]});
       }
   };
-
 
   return (
     <CalcContext.Provider
@@ -71,9 +84,7 @@ function CalcProvider(props) {
         calculations,
         userInput,
         smallCalcDisplay,
-        currNum,
-        operator,
-        prevNum,
+        prevNum
       }}
     >
       {props.children}
