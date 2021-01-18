@@ -21,6 +21,13 @@ io.on('connection', (socket) => {
   });
 });
 
+
+if (process.env.NODE_ENV === 'production'){
+  app.use(express.static('client/build'))
+}
+
+
+
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 });
